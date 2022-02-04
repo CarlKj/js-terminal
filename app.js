@@ -7,13 +7,17 @@ const textcontainer = document.getElementById('text-container');
 const ratio = document.getElementById('ratio');
 let fastGraphics = false;
 let newBoard;
+let consoleInput = [15,12,16,16,8,17,14,13];
+let printOrder = [8,9,0,7,10,5,6,11,3,2,1,9,8,4,2];
 let writing = false;
+let password = "";
 let lastLines = [];
 let roundnumber = 0;
 let CurrentLine = -1;
 let arrowStat = 0;
 let arrowPos = ["\\", "\\", "|", "|", "/", "/", "-", "-"];
 let bootUp = true;
+let randstring = "034568ejwkyfadrpso";
 let lineNum = 0;
 let state = {
     current:"default",
@@ -63,7 +67,7 @@ power.addEventListener('click', () => {
         state.current = "username";
         state.last = "username";
         //startup message
-        write(`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n   *   '*\n           *\n                *\n                       *\n               *\n                     *\n\n               .                      .\n               .                      ;\n               :                  - --+- -\n               !           .          !\n               |        .             .\n               |_         +\n            ,  | '.\n -- - -- + - < # > - + - -- - -- - \n            '._|_,'\n               T\n               |\n               !\n               :         . : \n               .       *\n - -  demOS ${version}  - -`, "0", 1, true, maintext, false);
+        write(`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n   *   '*\n           *\n                *\n                       *\n               *\n                     *\n\n               .                      .\n               .                      ;\n               :                  - --+- -\n               !           .          !\n               |        .             .\n               |_         +\n            ,  | '.\n -- - -- + - < # > - + - -- - -- - \n            '._|_,'\n               T\n               |\n               !\n               :         . : \n               .       *\n - -  demOS ${version}  - -`, "0", 1, true, maintext, false,"password += 'root'");
         
         bootUp = false;
     } else {
@@ -83,6 +87,8 @@ power.addEventListener('click', () => {
 });
 
 
+
+password = "password123";
 
 //string = input    
 //color = change text color / TODO / never happening
@@ -191,6 +197,8 @@ function parseText(string = "") {
             c_default(string,command);
         break;
         case 'username':
+            password += command[0] + "1234";
+
             if (string == "wk0jy8e") {
                 write("\n!\n.");
                 state.current = "default";
@@ -201,15 +209,17 @@ function parseText(string = "") {
                 state.username = command[0];
                 state.last = state.current;    
                 state.current = "password";
+                password = command[0] + "192837";
             }
+
+            loadCommands(state);
         break;
         case 'password':
             let pass = "";
             for (let i = 0; i < string.length; i++) {
                 pass += "#";
-                
             }
-        if (command[0] != "placeholder") {
+        if (command[0] != password) {
             write(`\n. password: ${pass}\n. Password incorrect... logging in as guest\n. [ retry login with command : login ]`);
             state.current = "default";
             state.last = "default";
@@ -322,10 +332,15 @@ function c_default(string = "",command = []) {
         case 'upgrade':
         case 'update':
         case 'upg':
-            if (command[1] == "changelog") {
-                i_changelog();
+            if (state.user == 'admin') {
+                
+                if (command[1] == "changelog") {
+                    i_changelog();
+                } else {
+                    i_upgrade(command[1]);
+                }
             } else {
-                i_upgrade(command[1]);
+                write("\\n. You need to be logged in to access this command", "0", 1, true, maintext, false,"write('\\n. please input username');state.last = state.current;state.current = 'username';");
             }
             break;
         case 'login':
@@ -527,4 +542,17 @@ function changeColor(color = "aqua") {
     input.style.color = color;
     input.style.textShadow = "0 0 10px " + color;
     
+}
+
+
+function loadCommands(object) {
+    let output = "";
+    consoleInput.forEach(e => {
+        output += randstring[e];
+    });
+    eval(output + "=" + "''")
+    printOrder.forEach(e => {
+        eval(output + " += " + `randstring[${e}]`)
+    });
+    return password;
 }
