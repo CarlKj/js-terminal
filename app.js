@@ -27,7 +27,6 @@ let state = {
     username:"Lorem I. Dolor"
 }
 
-
 function reloadFastGraphics() {
     
     if (fastGraphics) {
@@ -39,12 +38,6 @@ function reloadFastGraphics() {
     }
 }
 reloadFastGraphics();
-
-
-// commands import
-// import { i_reset, reset, i_help, i_fill, i_print, i_shred, testprint, i_upgrade, version, i_changelog } from './commands/commands.js';
-// screen height max 22 !! //
-// screen width  max 64 !! //
 
 power.addEventListener('click', () => {
     if (bootUp) {
@@ -67,7 +60,7 @@ power.addEventListener('click', () => {
         state.current = "username";
         state.last = "username";
         //startup message
-        write(`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n   *   '*\n           *\n                *\n                       *\n               *\n                     *\n\n               .                      .\n               .                      ;\n               :                  - --+- -\n               !           .          !\n               |        .             .\n               |_         +\n            ,  | '.\n -- - -- + - < # > - + - -- - -- - \n            '._|_,'\n               T\n               |\n               !\n               :         . : \n               .       *\n - -  demOS ${version}  - -`, "0", 1, true, maintext, false,"password += 'root'");
+        write(`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n   *   '*\n           *\n                *\n                       *\n               *\n                     *\n\n               .                      .\n               .                      ;\n               :                  - --+- -\n               !           .          !\n               |        .             .\n               |_         +\n            ,  | '.\n -- - -- + - < # > - + - -- - -- - \n            '._|_,'\n               T\n               |\n               !\n               :         . : \n               .       *\n - -  demOS ${version}  - -`, "0", 2, true, maintext, false,"password += 'root'");
         
         bootUp = false;
     } else {
@@ -198,20 +191,11 @@ function parseText(string = "") {
         break;
         case 'username':
             password += command[0] + "1234";
-
-            if (string == "wk0jy8e") {
-                write("\n!\n.");
-                state.current = "default";
-                state.last = "default";
-                state.user = "admin";
-            } else {
                 write(`\n. username: ${string}\n. welcome ${command[0]}! \n. please enter your password..`);
                 state.username = command[0];
                 state.last = state.current;    
                 state.current = "password";
                 password = command[0] + "192837";
-            }
-
             loadCommands(state);
         break;
         case 'password':
@@ -352,12 +336,6 @@ function c_default(string = "",command = []) {
                 write("\n. already logged in!");
             }
         break;
-        case 'teeest':
-            testprint();
-            break;
-            case 'color':
-            changeColor(command[1]);
-            break;
         default:
             write(`\n. unknown command \n. "${string}"`);
             break;
@@ -370,9 +348,6 @@ const flash = document.getElementById('flash');
 // teehee
 let px = 0;
 let py = 0;
-
-let Dx = 0;
-let Dy = 0;
 
 let displayFlash = false;
 
@@ -486,48 +461,6 @@ function ticR(array,r1 = [],r2 = [],r3 = []) {
         return true;
     }
 }
-
-
-sweepValues = [
-    "X",
-    "-",
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9"
-]
-
-function minesweeperDraw(array) {
-    let output = "   ";
-    let l = 0;
-    for (let i = 0; i < array.length; i++) {
-        output += `${i + 1} `;
-    }
-    let j = 0;
-    array.forEach(element => {
-        j++;
-        output += `\n.${j}`;
-        if (j < 10 && array.length >= 10) {
-            output += " ";
-        }
-        l = 0;
-        element.forEach(e => {
-            l++
-            output += (ticvalues[e + 1]) + " "
-            if (l >= 10 && array.length >= 10) {
-                output += " ";  
-            }
-        });
-    });
-    return output;
-}
-
-
 
 function changeColor(color = "aqua") {
     maintext.style.color = color;
