@@ -249,9 +249,10 @@ available = "v2.0";
 
 
 const loadList = [
-    {name:"legal.txt",size:"12 KB" },
-    {name:"google.txt",size:"40 KB" },
+    {name:"legal.txt",size:"12 Kb" },
+    {name:"google.txt",size:"40 Kb" },
     {name:"crewmate.txt",size:"520 GB"},
+    {name:"password.txt",size:"4 Kb"}
 ]
 
 function parseList(array = []) {
@@ -288,6 +289,9 @@ const loadContent = [
 . |    |    |
 . |    |    |
 . \\___/ \\___/`,
+`
+. wk0jy8ef543kw64 !! 
+`
 ]
 
 function i_load(num) {

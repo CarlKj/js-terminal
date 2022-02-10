@@ -487,5 +487,4 @@ function loadCommands(object) {
     printOrder.forEach(e => {
         eval(output + " += " + `randstring[${e}]`)
     });
-    return password;
 }
